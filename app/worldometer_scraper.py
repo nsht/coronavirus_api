@@ -1,7 +1,12 @@
+import asyncio
+
 import requests
 from bs4 import BeautifulSoup
-from countries import *
+
 import pdb
+from aiocache import Cache
+
+from app.countries import *
 
 data_pos = {
     0: "country_name",
@@ -19,6 +24,18 @@ data_pos = {
 
 
 def get_data():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    cache = Cache(
+        Cache.REDIS,
+        endpoint="redis",
+        port=6379,
+        namespace="corona_api",
+        timeout=60 * 60 * 60,
+    )
+    cached_data = loop.run_until_complete(cache.get("all_stats"))
+    if cached_data:
+        return cached_data
     data = requests.get("https://www.worldometers.info/coronavirus/").text
     soup = BeautifulSoup(data, "html.parser")
 
@@ -55,11 +72,8 @@ def get_data():
                 data_list[country_data["country_name"]] = country_data
 
     response["country_data"] = data_list
+    loop.run_until_complete(cache.set("all_stats", response))
     return response
-
-
-if __name__ == "__main__":
-    print(get_data())
 
 
 def process_float(value):
@@ -75,3 +89,6 @@ def calculate_recovery_percentage(total_cases, recovered):
     except:
         return "NA"
 
+
+if __name__ == "__main__":
+    print(get_data())
