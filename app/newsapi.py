@@ -1,5 +1,5 @@
 import requests
-from secrets import *
+from app.secrets import *
 
 def get_news(country_name="in"):
     url = f"http://newsapi.org/v2/top-headlines?q=coronavirus\

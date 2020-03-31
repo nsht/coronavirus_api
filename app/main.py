@@ -1,13 +1,12 @@
 from fastapi import FastAPI
-from worldometer_scraper import get_data
-from newsapi import get_news
+from app.worldometer_scraper import get_data
+from app.newsapi import get_news
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 origins = [
-    "http://localhost",
-    "http://localhost:8080",
+    "*",
 ]
 
 app.add_middleware(
