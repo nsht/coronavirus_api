@@ -56,7 +56,8 @@ def get_data():
                         print(f"Error converting to int for data {data}")
                 else:
                     stat_number = process_float(stat_number)
-
+                if stat_number == "":
+                    stat_number = "NA"
                 country_data[data_pos[index]] = stat_number
 
         if country_data.get("country_name"):
