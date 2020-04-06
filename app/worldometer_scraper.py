@@ -19,7 +19,8 @@ data_pos = {
     7: "critical",
     8: "cases_per_million_pop",
     9: "deaths_per_million_pop",
-    10: "1st_case_date",
+    10: "total_tests",
+    11: "tests_per_million",
 }
 
 
@@ -63,9 +64,13 @@ def get_data():
         if country_data.get("country_name"):
             if country_data["country_name"] == "Total:":
                 country_data["country_name"] = "World"
-            country_data["recovery_percentage"] = calculate_recovery_percentage(
-                total_cases=country_data["total_cases"],
-                recovered=country_data["total_recovered"],
+            country_data["recovery_percentage"] = calculate_percentage(
+                numerator=country_data["total_recovered"],
+                denominator=country_data["total_cases"],
+            )
+            country_data["postive_test_percentage"] = calculate_percentage(
+                numerator=country_data["total_cases"],
+                denominator=country_data["total_tests"],
             )
             try:
                 data_list[COUNTRY_LIST[country_data["country_name"]]] = country_data
@@ -84,9 +89,9 @@ def process_float(value):
         return value
 
 
-def calculate_recovery_percentage(total_cases, recovered):
+def calculate_percentage(numerator, denominator):
     try:
-        return round((recovered / total_cases) * 100, 2)
+        return round((numerator / denominator) * 100, 2)
     except:
         return "NA"
 
