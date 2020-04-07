@@ -12,7 +12,7 @@ def get_news(country_name="in"):
         endpoint="redis",
         port=6379,
         namespace="corona_api",
-        timeout=60 * 60 * 30,
+        timeout=60 * 30,
     )
     cached_data = loop.run_until_complete(cache.get(f"news_{country_name}"))
     if cached_data:
