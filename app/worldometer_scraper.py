@@ -32,7 +32,7 @@ def get_data():
         endpoint="redis",
         port=6379,
         namespace="corona_api",
-        timeout=60 * 30,
+        timeout=60 * 15,
     )
     cached_data = loop.run_until_complete(cache.get("all_stats"))
     if cached_data:
