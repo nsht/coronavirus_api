@@ -27,13 +27,7 @@ data_pos = {
 def get_data():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    cache = Cache(
-        Cache.REDIS,
-        endpoint="redis",
-        port=6379,
-        namespace="corona_api",
-        timeout=60 * 15,
-    )
+    cache = Cache(Cache.REDIS, endpoint="redis", port=6379, namespace="corona_api",)
     cached_data = loop.run_until_complete(cache.get("all_stats"))
     if cached_data:
         return cached_data
@@ -78,7 +72,7 @@ def get_data():
                 data_list[country_data["country_name"]] = country_data
 
     response["country_data"] = data_list
-    loop.run_until_complete(cache.set("all_stats", response))
+    loop.run_until_complete(cache.set("all_stats", response, ttl=60 * 15))
     return response
 
 

@@ -7,13 +7,7 @@ from app.secrets import *
 def get_news(country_name="in"):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    cache = Cache(
-        Cache.REDIS,
-        endpoint="redis",
-        port=6379,
-        namespace="corona_api",
-        timeout=60 * 15,
-    )
+    cache = Cache(Cache.REDIS, endpoint="redis", port=6379, namespace="corona_api",)
     cached_data = loop.run_until_complete(cache.get(f"news_{country_name}"))
     if cached_data:
         return cached_data
@@ -22,5 +16,7 @@ def get_news(country_name="in"):
     data = requests.get(url)
     if data.status_code == 200:
         data = data.json()
-        loop.run_until_complete(cache.set(f"news_{country_name}", response))
+        loop.run_until_complete(
+            cache.set(f"news_{country_name}", response, ttl=60 * 15)
+        )
         return data
