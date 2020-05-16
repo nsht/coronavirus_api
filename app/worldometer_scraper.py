@@ -9,18 +9,19 @@ from aiocache import Cache
 from app.countries import *
 
 data_pos = {
-    0: "country_name",
-    1: "total_cases",
-    2: "new_cases",
-    3: "total_deaths",
-    4: "new_deaths",
-    5: "total_recovered",
-    6: "active_cases",
-    7: "critical",
-    8: "cases_per_million_pop",
-    9: "deaths_per_million_pop",
-    10: "total_tests",
-    11: "tests_per_million",
+    1: "country_name",
+    2: "total_cases",
+    3: "new_cases",
+    4: "total_deaths",
+    5: "new_deaths",
+    6: "total_recovered",
+    7: "active_cases",
+    8: "critical",
+    9: "cases_per_million_pop",
+    10: "deaths_per_million_pop",
+    11: "total_tests",
+    12: "tests_per_million",
+    13: "population",
 }
 
 
