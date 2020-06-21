@@ -23,4 +23,4 @@ To run this yourself, clone the repo and run
 docker-compose up -d
 ```
 
-Make sure docker and docker-compose is installed.
+Make sure docker and docker-compose are installed.
