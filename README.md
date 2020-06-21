@@ -9,7 +9,7 @@ https://corona-api.nishit.xyz/docs
 https://corona-api.nishit.xyz/stats
 
 ## Country specific Data
-https://corona-api.nishit.xyz/country/[Country code]
+https://corona-api.nishit.xyz/country/(country_code)
 
 Example: https://corona-api.nishit.xyz/country/in
 
