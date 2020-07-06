@@ -13,7 +13,7 @@ https://corona-api.nishit.xyz/country/(country_code)
 
 Example: https://corona-api.nishit.xyz/country/in
 
-List of countries can be found in the [stats api result](https://corona-api.nishit.xyz/stats)
+List of countries can be found here (mostly ISO 3166-1 alpha-2) [stats api result](https://github.com/ryux00/coronavirus_api/blob/master/app/countries.py)
 
 
 ## How to Self Host
