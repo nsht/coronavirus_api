@@ -14,7 +14,7 @@ hiredis==1.0.1
 httptools==0.1.1
 idna==2.9
 pathspec==0.7.0
-pydantic==1.4
+pydantic==1.6.2
 regex==2020.2.20
 requests==2.23.0
 soupsieve==2.0
